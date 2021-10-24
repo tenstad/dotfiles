@@ -1,0 +1,18 @@
+[alias]
+	a   = !git add --all && git status -s
+	c   = !git status -s && read msg && git commit -m \"$msg\"
+	ca  = commit --amend --no-edit
+	cae = commit --amend
+	co  = !git branch --format '%(refname:short)' | fzf --ansi --preview \"git log --color=always --oneline {}\" | xargs -r git checkout
+	cob = checkout -b
+	com = !git checkout main || git checkout master
+	d   = diff
+	l   = log
+	p   = push
+	pf  = push -f
+        r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
+	rh  = reset --hard
+	s   = status
+[user]
+	email = github@amund.io
+	name = Amund Tenstad
