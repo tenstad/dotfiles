@@ -10,6 +10,7 @@
 	l   = log
 	p   = push
 	pf  = push -f
+	pu  = pull
         r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
 	rh  = reset --hard
 	s   = status
