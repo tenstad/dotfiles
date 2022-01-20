@@ -3,7 +3,7 @@
 	c   = !git status -s && read msg && git commit -m \"$msg\"
 	ca  = commit --amend --no-edit
 	cae = commit --amend
-	co  = !git branch -a --format '%(refname:short)' | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
+	co  = !git fetch && git branch -a --format '%(refname:short)' | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob = checkout -b
 	com = !git checkout main || git checkout master
 	d   = diff
