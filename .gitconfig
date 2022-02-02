@@ -7,14 +7,20 @@
 	cob = checkout -b
 	com = !git checkout main || git checkout master
 	d   = diff
+	f   = fetch
 	l   = log
+	ls  = !cat ~/.gitconfig | sed -n \"/\\[alias\\]/,/\\[user\\]/p\" | sed '1d' | sed '$d'
 	p   = push
 	pf  = push -f
-	pu  = pull
 	r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
+	rc  = rebase --continue
+	rs  = rebase --skip
 	rh  = reset --hard
 	s   = status
-	su  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
+	sp  = stash pop
+	st  = stash
+	u   = pull
+	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 [user]
 	email = github@amund.io
 	name = Amund Tenstad
