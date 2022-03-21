@@ -1,5 +1,6 @@
 [alias]
 	a   = !git add --all && git status -s
+	b   = "!f(){ git checkout $1 2> /tmp/gitb; if [ $? -eq 0 ]; then cat /tmp/gitb; else git checkout -b $1; fi ;};f"
 	c   = !git status -s && read msg && git commit -m \"$msg\"
 	ca  = commit --amend --no-edit
 	cae = commit --amend
@@ -11,6 +12,7 @@
 	l   = log
 	ls  = !cat ~/.gitconfig | sed -n \"/\\[alias\\]/,/\\[user\\]/p\" | sed '1d' | sed '$d'
 	p   = push
+	pu  = pull
 	pf  = push -f
 	r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
 	rc  = rebase --continue
@@ -21,6 +23,10 @@
 	st  = stash
 	u   = pull
 	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
+[push]
+        default = current
+[pull]
+        rebase = true
 [user]
 	email = github@amund.io
 	name = Amund Tenstad
