@@ -1,6 +1,4 @@
 mkdir -p ~/coding ~/programs ~/.bashrc.d 
-[ -d ~/coding/dotfiles ] || git clone git@github.com:tenstad/dotfiles.git ~/coding/dotfiles
-sh ~/coding/dotfiles/sync.sh
 
 [ -d ~/programs/fzf ] || git clone --depth 1 https://github.com/junegunn/fzf.git ~/programs/fzf
 ~/programs/fzf/install --key-bindings --completion --no-update-rc
@@ -12,3 +10,6 @@ sudo dnf install -y albert
 
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
 gsettings set org.gnome.desktop.interface cursor-size 36
+
+[ -d ~/coding/dotfiles ] || git clone git@github.com:tenstad/dotfiles.git ~/coding/dotfiles
+sh ~/coding/dotfiles/sync.sh
