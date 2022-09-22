@@ -17,3 +17,7 @@ alias ne='"$EDITOR" ~/.notes'
 
 alias d='docker'
 alias k='kubectl'
+
+function w {
+    watch -n 1 $(alias "$1" | cut -d\' -f2) ${@:2}
+}
