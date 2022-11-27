@@ -17,6 +17,13 @@ alias ne='"$EDITOR" ~/.notes'
 
 alias d='docker'
 alias k='kubectl'
+alias kn='kubectl neat get'
+function ks {
+    kubectl get secret $@ -o go-template='{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}'
+}
+
+alias x='xargs'
+for i in $(seq 1 9); do alias "f${i}"="awk '{print \$${i}}'"; done
 
 function w {
     watch -n 1 $(alias "$1" | cut -d\' -f2) ${@:2}
