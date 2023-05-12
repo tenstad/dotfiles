@@ -15,6 +15,7 @@
 	pu  = pull
 	pf  = push -f
 	r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
+	re  = rebase -i HEAD~10
 	rc  = rebase --continue
 	rs  = rebase --skip
 	rh  = reset --hard
