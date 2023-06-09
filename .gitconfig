@@ -10,7 +10,7 @@
 	d   = diff
 	f   = fetch
 	l   = log
-	ls  = !cat ~/.gitconfig | sed -n \"/\\[alias\\]/,/^\\[/p\" | sed '1d' | sed '$d'
+	ls  = alias
 	p   = push
 	pu  = pull
 	pf  = push -f
