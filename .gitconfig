@@ -1,7 +1,7 @@
 [alias]
 	a   = !git add --all && git status -s
 	b   = "!f(){ git checkout $1 2> /tmp/gitb; if [ $? -eq 0 ]; then cat /tmp/gitb; else git checkout -b $1; fi ;};f"
-	c   = !git status -s && read msg && git commit -m \"$msg\"
+	c   = commit
 	ca  = commit --amend --no-edit
 	cae = commit --amend
 	co  = !git fetch && git branch -a --format '%(refname:short)' | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
