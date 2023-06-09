@@ -10,6 +10,7 @@
 	d   = diff
 	d   = diff --cached
 	f   = fetch
+	fx  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
 	l   = log
 	ls  = alias
 	p   = push
@@ -24,6 +25,7 @@
 	s   = status
 	sp  = stash pop
 	st  = stash
+	sq  = rebase --interactive --autosquash main
 	u   = pull
 	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 [push]
