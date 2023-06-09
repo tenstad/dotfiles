@@ -8,6 +8,7 @@
 	cob = checkout -b
 	com = !git checkout main || git checkout master
 	d   = diff
+	d   = diff --cached
 	f   = fetch
 	l   = log
 	ls  = alias
@@ -15,6 +16,7 @@
 	pu  = pull
 	pf  = push -f
 	r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
+	ra  = rebase --abort
 	re  = rebase -i HEAD~10
 	rc  = rebase --continue
 	rs  = rebase --skip
