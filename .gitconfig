@@ -8,7 +8,7 @@
 	cob = checkout -b
 	com = "!if [ `git rev-parse --verify main 2>/dev/null` ]; then git checkout main; else git checkout master; fi"
 	d   = diff
-	d   = diff --cached
+	ds  = diff --cached
 	f   = fetch
 	fx  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
 	l   = log
