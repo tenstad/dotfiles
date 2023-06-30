@@ -6,6 +6,7 @@ alias cert='f(){ echo -n | openssl s_client -connect $1:${2:-443} | openssl x509
 alias p='find "$PROJECT_DIR" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | fzf --preview "ls -A $PROJECT_DIR/{}" | xargs -ri code "$PROJECT_DIR/{}"'
 
 alias g='git'
+alias lg='lazygit'
 for cmd in $(git ls | awk '{print $1}'); do alias "g${cmd}"="git ${cmd}"; done
 
 alias be='"$EDITOR" ~/coding/dotfiles/.bashrc.d/main'
