@@ -1,0 +1,17 @@
+ceildiv() {
+        echo $(( ( $1 / $2 ) + ( $1 % $2 > 0 ) ))
+}
+
+floordiv() {
+        echo $(( $1 / $2 ))
+}
+
+trimmid() {
+        if [[ $2 -le 4 ]]; then
+                echo "${1:0:$2}"
+        elif [[ $(printf "%s" "$1" | wc -m) -gt $2 ]]; then
+                lower=$(ceildiv $(( $2 - 2 )) 2)
+                upper=$(floordiv $(( $2 - 2 )) 2)
+                echo "${1:0:${lower}}..${1:(-${upper})}"
+        else echo "$1"; fi
+}
