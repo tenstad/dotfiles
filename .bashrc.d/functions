@@ -15,3 +15,30 @@ trimmid() {
                 echo "${1:0:${lower}}..${1:(-${upper})}"
         else echo "$1"; fi
 }
+
+ps1() {
+        # non-printable bytes are wrapped in \[ \] for correct line length calculation in PS1
+        magenta="\[\033[01;35m\]"
+        cyan="\[\033[01;36m\]"
+        blue="\[\033[01;34m\]"
+        reset="\[\033[0m\]"
+        PS1=""
+
+        context=$(kubectl config get-contexts --no-headers | grep '\*')
+        cluster=$(echo "$context" | awk '{print $3}' | sed "${PS1_K8S_SED:-s/:[0-9]*//}")
+        if [ -n "$cluster" ]; then
+                ns=$(echo "$context" | awk '{print $5}')
+                ns=$(trimmid "$ns" 16)
+                k8s_symbol=$'\xE2\x8E\x88'
+                PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
+        fi
+
+        PS1="$PS1${magenta}\w"
+
+        branch=$(git branch --show-current 2> /dev/null)
+        if [ -n "$branch"  ];then
+                branch=$(trimmid "$branch" 16)
+                branch_symbol=$'\xE2\x8E\x87'
+                PS1="$PS1 ${blue}${branch_symbol} ${cyan}${branch}${reset} "
+        fi
+}
