@@ -31,9 +31,9 @@
 	u   = pull
 	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 [push]
-        default = current
+	default = current
 [pull]
-        rebase = true
+	rebase = true
 [user]
 	email = github@amund.io
 	name = Amund Tenstad
