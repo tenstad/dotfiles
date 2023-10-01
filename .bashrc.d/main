@@ -1,5 +1,5 @@
-EDITOR=nano
-PROJECT_DIR=~/coding
+export EDITOR=nano
+export PROJECT_DIR=~/coding
 
 alias cert='f(){ echo -n | openssl s_client -connect $1:${2:-443} | openssl x509 -text -noout; }; f'
 
