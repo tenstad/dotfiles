@@ -10,6 +10,7 @@
 	d   = diff
 	ds  = diff --cached
 	f   = fetch
+	fa   = fetch --all
 	fx  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
 	l   = log
 	ls  = alias
