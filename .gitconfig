@@ -1,10 +1,11 @@
 [alias]
 	a   = !git add --all && git status -s
 	b   = "!f(){ git checkout $1 2> /tmp/gitb; if [ $? -eq 0 ]; then cat /tmp/gitb; else git checkout -b $1; fi ;};f"
+	bl  = branch -a --format '%(refname:short)'
 	c   = commit
 	ca  = commit --amend --no-edit
 	cae = commit --amend
-	co  = !git branch -a --format '%(refname:short)' | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
+	co  = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob = checkout -b
 	com = "!if [ `git rev-parse --verify main 2>/dev/null` ]; then git checkout main; else git checkout master; fi"
 	d   = diff
@@ -12,13 +13,14 @@
 	f   = fetch
 	fa  = fetch --all
 	fu  = fetch upstream
-	fx  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
+	fx  = !git l1 | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
 	l   = log
+	l1  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s'
 	ls  = alias
 	p   = push
 	pu  = pull
 	pf  = push -f
-	r   = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
+	r   = !git l1 | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git reset
 	ra  = rebase --abort
 	ri  = rebase -i HEAD~10
 	rc  = rebase --continue
