@@ -33,12 +33,12 @@ ps1() {
                 PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
         fi
 
-        PS1="$PS1${magenta}\w${reset}"
+        PS1="$PS1${magenta}\w${reset} "
 
         branch=$(git branch --show-current 2> /dev/null)
         if [ -n "$branch"  ];then
                 branch=$(trimmid "$branch" 16)
                 branch_symbol=$'\xE2\x8E\x87'
-                PS1="$PS1 ${blue}${branch_symbol} ${cyan}${branch}${reset} "
+                PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
         fi
 }
