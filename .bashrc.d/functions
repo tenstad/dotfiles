@@ -33,7 +33,7 @@ ps1() {
                 PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
         fi
 
-        PS1="$PS1${magenta}\w"
+        PS1="$PS1${magenta}\w${reset}"
 
         branch=$(git branch --show-current 2> /dev/null)
         if [ -n "$branch"  ];then
