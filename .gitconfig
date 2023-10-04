@@ -1,37 +1,39 @@
 [alias]
-	a   = !git add --all && git status -s
-	b   = "!f(){ if [ `git rev-parse --verify $1 2>/dev/null` ]; then git checkout $1; else git checkout -b $1; fi ;};f"
-	bl  = branch -a --format '%(refname:short)'
-	c   = commit
-	ca  = commit --amend --no-edit
-	cae = commit --amend
-	co  = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
-	cob = checkout -b
-	com = !git checkout $(git fn-main-branch)
-	clo = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
-	d   = diff
-	ds  = diff --cached
-	f   = fetch
-	fa  = fetch --all
-	fu  = fetch upstream
-	fx  = !git fn-select-commit | xargs -r git commit --fixup
-	l   = log
-	ls  = !git config --get-regexp ^alias | sed \"s|alias\\.||\"
-	p   = push
-	pu  = pull
-	pf  = push -f
-	r   = !git fn-select-commit | xargs -r git reset
-	ra  = rebase --abort
-	ri  = rebase -i HEAD~10
-	rc  = rebase --continue
-	rs  = rebase --skip
-	rh  = reset --hard
-	s   = status
-	sp  = stash pop
-	st  = stash
-	sq  = !git rebase --interactive --autosquash $(git fn-main-branch)
-	u   = pull
-	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
+	a    = !git add --all && git status -s
+	b    = "!f(){ if [ `git rev-parse --verify $1 2>/dev/null` ]; then git checkout $1; else git checkout -b $1; fi ;};f"
+	bl   = branch -a --format '%(refname:short)'
+	c    = commit
+	ca   = commit --amend --no-edit
+	cae  = commit --amend
+	co   = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
+	cob  = checkout -b
+	com  = !git checkout $(git fn-main-branch)
+	clo  = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
+	d    = diff
+	ds   = diff --cached
+	f    = fetch
+	fa   = fetch --all
+	fu   = fetch upstream
+	fx   = !git fn-select-commit | xargs -r git commit --fixup
+	l    = log
+	ls   = !git config --get-regexp ^alias | sed \"s|alias\\.||\"
+	p    = push
+	pu   = pull
+	pf   = push -f
+	r    = !git fn-select-commit | xargs -r git reset
+	ra   = rebase --abort
+	ri   = rebase -i HEAD~10
+	rc   = rebase --continue
+	rs   = rebase --skip
+	rh   = reset --hard
+	rhom = !git reset --hard origin/$(git fn-main-branch)
+	rhum = !git reset --hard upstream/$(git fn-main-branch)
+	s    = status
+	sp   = stash pop
+	st   = stash
+	sq   = !git rebase --interactive --autosquash $(git fn-main-branch)
+	u    = pull
+	up   = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 
 	fn-main-branch   = !git symbolic-ref refs/remotes/origin/HEAD --short | sed \"s|.*/||\"
 	fn-select-commit = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}'
