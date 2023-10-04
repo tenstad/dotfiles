@@ -16,7 +16,7 @@
 	fu   = fetch upstream
 	fx   = !git fn-select-commit | xargs -r git commit --fixup
 	l    = log
-	ls   = !git config --get-regexp ^alias | sed \"s|alias\\.||\"
+	ls   = !git config --get-regexp ^alias | sed \"s|alias\\.||\" | sed \"/^fn-/d\"
 	p    = push
 	pf   = push -f
 	pu   = pull
