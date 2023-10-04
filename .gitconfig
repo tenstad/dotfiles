@@ -7,7 +7,7 @@
 	cae = commit --amend
 	co  = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob = checkout -b
-	com = "!if [ `git rev-parse --verify main 2>/dev/null` ]; then git checkout main; else git checkout master; fi"
+	com = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD --short | sed \"s|origin/||\")
 	clo = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
 	d   = diff
 	ds  = diff --cached
