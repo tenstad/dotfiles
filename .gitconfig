@@ -1,6 +1,6 @@
 [alias]
 	a   = !git add --all && git status -s
-	b   = "!f(){ git checkout $1 2> /tmp/gitb; if [ $? -eq 0 ]; then cat /tmp/gitb; else git checkout -b $1; fi ;};f"
+	b   = "!f(){ if [ `git rev-parse --verify $1 2>/dev/null` ]; then git checkout $1; else git checkout -b $1; fi ;};f"
 	bl  = branch -a --format '%(refname:short)'
 	c   = commit
 	ca  = commit --amend --no-edit
