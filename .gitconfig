@@ -2,12 +2,13 @@
 	a   = !git add --all && git status -s
 	b   = "!f(){ if [ `git rev-parse --verify $1 2>/dev/null` ]; then git checkout $1; else git checkout -b $1; fi ;};f"
 	bl  = branch -a --format '%(refname:short)'
+	bm  = !git symbolic-ref refs/remotes/origin/HEAD --short | sed \"s|.*/||\"
 	c   = commit
 	ca  = commit --amend --no-edit
 	cae = commit --amend
 	co  = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob = checkout -b
-	com = !git checkout $(git symbolic-ref refs/remotes/origin/HEAD --short | sed \"s|origin/||\")
+	com = !git checkout $(git bm)
 	clo = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
 	d   = diff
 	ds  = diff --cached
@@ -30,7 +31,7 @@
 	s   = status
 	sp  = stash pop
 	st  = stash
-	sq  = rebase --interactive --autosquash main
+	sq  = !git rebase --interactive --autosquash $(git bm)
 	u   = pull
 	up  = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 [push]
