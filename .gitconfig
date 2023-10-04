@@ -17,7 +17,7 @@
 	fx  = !git l1 | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}' | xargs -r git commit --fixup
 	l   = log
 	l1  = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s'
-	ls  = alias
+	ls  = !git config --get-regexp ^alias | sed \"s|alias\\.||\"
 	p   = push
 	pu  = pull
 	pf  = push -f
