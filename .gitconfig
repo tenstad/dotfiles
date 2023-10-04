@@ -5,10 +5,10 @@
 	c    = commit
 	ca   = commit --amend --no-edit
 	cae  = commit --amend
+	clo  = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
 	co   = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob  = checkout -b
 	com  = !git checkout $(git fn-main-branch)
-	clo  = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
 	d    = diff
 	ds   = diff --cached
 	f    = fetch
@@ -18,20 +18,20 @@
 	l    = log
 	ls   = !git config --get-regexp ^alias | sed \"s|alias\\.||\"
 	p    = push
-	pu   = pull
 	pf   = push -f
+	pu   = pull
 	r    = !git fn-select-commit | xargs -r git reset
 	ra   = rebase --abort
-	ri   = rebase -i HEAD~10
 	rc   = rebase --continue
-	rs   = rebase --skip
 	rh   = reset --hard
 	rhom = !git reset --hard origin/$(git fn-main-branch)
 	rhum = !git reset --hard upstream/$(git fn-main-branch)
+	ri   = rebase -i HEAD~10
+	rs   = rebase --skip
 	s    = status
 	sp   = stash pop
-	st   = stash
 	sq   = !git rebase --interactive --autosquash $(git fn-main-branch)
+	st   = stash
 	u    = pull
 	up   = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 
