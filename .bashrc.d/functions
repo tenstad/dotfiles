@@ -42,3 +42,14 @@ ps1() {
                 PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
         fi
 }
+
+previewhighlights() {
+	langs=$(curl -sSf https://highlightjs.org/demo \
+		| sed 's|.*lang-selector\(.*\)selector.*|\1|' \
+		| sed "s|</option>|\n|g" \
+		| sed -n "s|^<option>||p" \
+	)
+	for lang in $langs; do
+		echo -e "${lang}\n\n\`\`\`${lang}\n${1}\n\`\`\`\n"
+	done
+}
