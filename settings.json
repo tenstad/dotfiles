@@ -1,0 +1,101 @@
+{
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+
+  "workbench.colorTheme": "One Dark Pro Flat",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#180028",
+    "editor.background": "#180028",
+    "editorGroup.emptyBackground": "#180028",
+    "editorGroupHeader.tabsBackground": "#180028",
+    "editorOverviewRuler.border": "#180028",
+    "focusBorder": "#180028",
+    "panel.background": "#180028",
+    "scrollbar.shadow": "#180028",
+    "settings.focusedRowBackground": "#180028",
+    "sideBar.background": "#180028",
+    "sideBarSectionHeader.background": "#180028",
+    "statusBar.background": "#180028",
+    "statusBar.border": "#180028",
+    "statusBar.noFolderBackground": "#180028",
+    "statusBarItem.warningBackground": "#180028",
+    "tab.activeBackground": "#180028",
+    "tab.border": "#180028",
+    "tab.inactiveBackground": "#180028",
+    "titleBar.activeBackground": "#180028",
+    "titleBar.inactiveBackground": "#180028",
+    "terminal.background": "#120024",
+
+    "list.focusBackground": "#311B3F",
+    "list.inactiveSelectionBackground": "#311B3F",
+    "menubar.selectionBackground": "#311B3F",
+    "panelSection.dropBackground": "#311B3F",
+    "sideBar.dropBackground": "#311B3F",
+    "tab.hoverBackground": "#311B3F",
+    "tab.unfocusedHoverBackground": "#311B3F",
+
+    "editorInlayHint.background": "#311B3F",
+    "editor.lineHighlightBackground": "#311B3F",
+
+    "activityBarBadge.background": "#150023",
+    "badge.background": "#150023",
+    "breadcrumbPicker.background": "#150023",
+    "debugToolBar.background": "#150023",
+    "dropdown.background": "#150023",
+    "dropdown.border": "#150023",
+    "dropdown.listBackground": "#150023",
+    "editorHoverWidget.background": "#150023",
+    "editorMarkerNavigation.background": "#150023",
+    "editorSuggestWidget.background": "#150023",
+    "editorWidget.background": "#150023",
+    "input.background": "#150023",
+    "listFilterWidget.background": "#150023",
+    "panelSectionHeader.background": "#150023",
+
+    "editorSuggestWidget.selectedBackground": "#3E2351",
+    "list.activeSelectionBackground": "#3E2351",
+    "list.hoverBackground": "#3E2351",
+
+    "editorGroup.border": "#180028",
+    "panelInput.border": "#180028",
+    "sideBar.border": "#180028",
+    "widget.shadow": "#180028",
+
+    "panel.border": "#180028",
+    "terminal.border": "#180028",
+
+    "editorCursor.foreground": "#fff",
+
+    "panelTitle.activeBorder": "#180028",
+    "panelTitle.activeForeground": "#C678DD",
+    "panelTitle.inactiveForeground": "#6C4B82",
+
+    "editorLineNumber.activeForeground": "#744296",
+    "editorLineNumber.foreground": "#4E3366",
+
+    "terminal.ansiBrightMagenta": "#C678DD",
+    "terminal.ansiBlue": "#002dc3",
+    "terminal.ansiBrightBlue": "#0062ff",
+    "terminal.ansiBrightCyan": "#56B6C2"
+  },
+
+  "editor.fontFamily": "'SauceCodePro', Consolas, 'Courier New', monospace",
+  "workbench.statusBar.visible": false,
+  "workbench.layoutControl.enabled": false,
+  "zenMode.hideLineNumbers": false,
+  "window.zoomLevel": 1,
+  "window.commandCenter": false,
+
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "workspace",
+  "yaml.customTags": ["!reference sequence"]
+}
