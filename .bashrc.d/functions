@@ -16,6 +16,22 @@ trimmid() {
         else echo "$1"; fi
 }
 
+gettgl() {
+        touch ~/.tgl
+        grep -sq "$1=true" ~/.tgl
+}
+
+tgl() {
+        touch ~/.tgl
+        key=$(cut -d " " -f1 < ~/.tgl | fzf --preview "cat ~/.tgl | grep '{}' | cut -d '#' -f2 | sed 's/^ //'")
+        if [ "$key" == "" ]; then return 0; fi
+        key=$(echo "$key" | cut -d '=' -f1)
+        value=$(grep "${key}=" ~/.tgl | cut -d ' ' -f1 | cut -d '=' -f2)
+        if [ "$value" == "true" ]; then value="false"; else value="true"; fi
+        sed -i "s/${key}=[^ ]*/${key}=${value}/" ~/.tgl
+        echo "${key}=${value}"
+}
+
 ps1() {
         # non-printable bytes are wrapped in \[ \] for correct line length calculation in PS1
         magenta="\[\033[01;35m\]"
@@ -24,20 +40,24 @@ ps1() {
         reset="\[\033[0m\]"
         PS1=""
 
-        context=$(kubectl config get-contexts --no-headers | grep '\*')
-        cluster=$(echo "$context" | awk '{print $3}' | sed "${PS1_K8S_SED:-s/:[0-9]*//}")
-        if [ -n "$cluster" ]; then
-                ns=$(echo "$context" | awk '{print $5}')
-                ns=$(trimmid "$ns" 16)
-                k8s_symbol=$'\xE2\x8E\x88'
-                PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
+        if gettgl PS1_K8S; then
+                context=$(kubectl config get-contexts --no-headers | grep '\*')
+                cluster=$(echo "$context" | awk '{print $3}' | sed "${PS1_K8S_SED:-s/:[0-9]*//}")
+                if [ -n "$cluster" ]; then
+                        ns=$(echo "$context" | awk '{print $5}')
+                        ns=$(trimmid "$ns" 16)
+                        k8s_symbol=$'\xE2\x8E\x88'
+                        PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
+                fi
         fi
 
         PS1="$PS1${magenta}\w${reset} "
 
         branch=$(git branch --show-current 2> /dev/null)
         if [ -n "$branch"  ];then
-                branch=$(trimmid "$branch" 16)
+                if gettgl PS1_GIT_TRIM_BRANCH; then
+                        branch=$(trimmid "$branch" 16)
+                fi
                 branch_symbol=$'\xE2\x8E\x87'
                 PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
         fi
