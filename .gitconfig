@@ -9,6 +9,9 @@
 	co   = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob  = checkout -b
 	com  = !git checkout $(git fn-main-branch)
+	cp   = cherry-pick
+	cpc  = cherry-pick --continue
+	cpa  = cherry-pick --abort
 	d    = diff
 	ds   = diff --cached
 	f    = fetch
