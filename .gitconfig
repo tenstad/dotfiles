@@ -29,7 +29,7 @@
 	rh   = reset --hard
 	rhom = !git reset --hard origin/$(git fn-default-branch)
 	rhum = !git reset --hard upstream/$(git fn-default-branch)
-	ri   = rebase -i HEAD~10
+	ri   = !git rebase -i $(git fn-select-commit)
 	rs   = rebase --skip
 	s    = status
 	sp   = stash pop
@@ -37,6 +37,7 @@
 	st   = stash
 	u    = pull
 	up   = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
+	us   = restore --staged .
 
 	fn-default-branch   = !git remote show origin | grep 'HEAD branch:' | awk '{print $3}'
 	fn-select-commit = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}'
