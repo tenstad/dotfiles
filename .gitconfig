@@ -8,7 +8,7 @@
 	clo  = "!f(){ cd $PROJECT_DIR && git clone $1 ;};f"
 	co   = !git bl | fzf --ansi --preview \"git log --color=always --oneline {}\" | sed \"s|origin/||\" | xargs -r git checkout
 	cob  = checkout -b
-	com  = !git checkout $(git fn-main-branch)
+	com  = !git checkout $(git fn-default-branch)
 	cp   = cherry-pick
 	cpc  = cherry-pick --continue
 	cpa  = cherry-pick --abort
@@ -27,18 +27,18 @@
 	ra   = rebase --abort
 	rc   = rebase --continue
 	rh   = reset --hard
-	rhom = !git reset --hard origin/$(git fn-main-branch)
-	rhum = !git reset --hard upstream/$(git fn-main-branch)
+	rhom = !git reset --hard origin/$(git fn-default-branch)
+	rhum = !git reset --hard upstream/$(git fn-default-branch)
 	ri   = rebase -i HEAD~10
 	rs   = rebase --skip
 	s    = status
 	sp   = stash pop
-	sq   = !git rebase --interactive --autosquash $(git fn-main-branch)
+	sq   = !git rebase --interactive --autosquash $(git fn-default-branch)
 	st   = stash
 	u    = pull
 	up   = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
 
-	fn-main-branch   = !git symbolic-ref refs/remotes/origin/HEAD --short | sed \"s|.*/||\"
+	fn-default-branch   = !git remote show origin | grep 'HEAD branch:' | awk '{print $3}'
 	fn-select-commit = !git log --color=always --pretty=format:'%C(white)%h %C(cyan)%s' | fzf --ansi --preview \"git show --color=always {1}\" | awk '{print $1}'
 [push]
 	default = current
