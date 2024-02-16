@@ -13,6 +13,7 @@
 	cpc  = cherry-pick --continue
 	cpa  = cherry-pick --abort
 	d    = diff
+	wd   = diff --word-diff
 	ds   = diff --cached
 	f    = fetch
 	fa   = fetch --all
