@@ -39,3 +39,7 @@ function tmp {
     mkdir -p "$DIR"
     cd "$DIR" || exit
 }
+
+function iconhex {
+  printf "$1" | od -An -tx1 | sed 's/ /\\x/g'
+}
