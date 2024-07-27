@@ -46,7 +46,8 @@ ps1() {
                 if [ -n "$cluster" ]; then
                         ns=$(echo "$context" | awk '{print $5}')
                         ns=$(trimmid "$ns" 16)
-                        k8s_symbol=$'\xE2\x8E\x88'
+                        # k8s_symbol=$'\xE2\x8E\x88'
+                        k8s_symbol=$'\xf3\xb1\x83\xbe'
                         PS1="$PS1${cyan}${ns}${blue}${k8s_symbol}${cyan}${cluster}${reset} "
                 fi
         fi
@@ -58,7 +59,8 @@ ps1() {
                 if gettgl PS1_GIT_TRIM_BRANCH; then
                         branch=$(trimmid "$branch" 16)
                 fi
-                branch_symbol=$'\xE2\x8E\x87'
+                # branch_symbol=$'\xE2\x8E\x87'
+                branch_symbol=$'\xef\x90\x98'
                 PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
         fi
 }
