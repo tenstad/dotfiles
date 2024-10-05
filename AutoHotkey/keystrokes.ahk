@@ -8,19 +8,20 @@ counter.Start()
 
 class KeyCounter {
     __New() {
-        this.count := 0
-        this.prev := 0
         this.actionsLastSec := 0
+
+        this.count := 0
+        loop read, this.LogFile() {
+            this.count += StrSplit(A_LoopReadLine, " ")[2]
+        }
+        this.prev := this.count
 
         this.countgui := StatGui(0, 1172)
         this.countText := this.countgui.AddText("_____")
         this.countText.Value := this.count
         this.countgui.Show()
 
-        this.warngui := WarnGui(this.countgui.ShowOnTop)
-
-        this.countgui := ""
-        this.countguitext := ""
+        this.warngui := WarnGui(ObjBindMethod(this.countgui, "ShowOnTop"))
 
         this.interval := interval
         this.timer := ObjBindMethod(this, "Log")
@@ -46,9 +47,7 @@ class KeyCounter {
         this.actionsLastSec++
         SetTimer () => (
             this.actionsLastSec--
-            SetTimer(, 0)
-            ;
-        ), 1000
+            SetTimer(, 0)), 1000
 
         if (this.actionsLastSec > 11) {
             this.warngui.Warn(10 * (this.actionsLastSec - 11))
@@ -60,11 +59,14 @@ class KeyCounter {
     Log() {
         diff := this.count - this.prev
         if (diff > 0) {
-            filename := Format("{:s}\{:s}.txt", logpath, CurrentDay())
-            FileAppend(Format("{:i} {:i}`n", CurrentMillis(), diff), filename)
+            FileAppend(Format("{:i} {:i}`n", CurrentMillis(), diff), this.LogFile())
         }
 
         this.prev := this.count
+    }
+
+    LogFile() {
+        return Format("{:s}\{:s}.txt", logpath, CurrentDay())
     }
 }
 
@@ -81,7 +83,10 @@ class StatGui {
         this.gui.BackColor := "FFFFFE"
         WinSetTransColor("FFFFFE", this.gui)
 
-        DllCall("dwmapi\DwmSetWindowAttribute", "ptr", this.gui.hwnd, "uint", 12, "uint*", 1, "uint", 4)
+        ; DwmSetWindowAttribute(hwnd, dwAttribute, pvAttribute, cbAttribute)
+        DllCall("dwmapi\DwmSetWindowAttribute", "ptr", this.gui.hwnd,
+            "uint", 12, ; DWMWA_EXCLUDED_FROM_PEEK
+            "uint*", 1, "uint", 4)
 
         ; SetWinEventHook(eventMin, eventMax, hmodWinEventProc, pfnWinEventProc, idProcess, idThread, dwFlags)
         DllCall("SetWinEventHook"
