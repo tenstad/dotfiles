@@ -21,10 +21,10 @@ class KeyCounter {
         this.countText.Value := this.count
         this.countgui.Show()
 
-        this.warngui := WarnGui(ObjBindMethod(this.countgui, "ShowOnTop"))
+        this.warngui := WarnGui(() => this.countgui.ShowOnTop())
 
         this.interval := interval
-        this.timer := ObjBindMethod(this, "Log")
+        this.timer := () => this.Log()
 
         this.hook := InputHook()
         this.hook.KeyOpt("{All}", "V N")
@@ -134,7 +134,7 @@ class WarnGui {
 
         this.onClear := onClear
         this.gui := ""
-        this.timer := ObjBindMethod(this, "Clear")
+        this.timer := () => this.Clear()
     }
 
     Warn(opacity) {
