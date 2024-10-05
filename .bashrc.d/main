@@ -26,6 +26,11 @@ function ks {
 alias x='xargs'
 for i in $(seq 1 9); do alias "f${i}"="awk '{print \$${i}}'"; done
 
+function msum {
+    col=${1:-1}
+    awk "{s+=\$$col} END {print s}"
+}
+
 function w {
     watch -n 1 $(alias "$1" | cut -d\' -f2) ${@:2}
 }
