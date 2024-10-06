@@ -11,8 +11,10 @@ class KeyCounter {
         this.actionsLastSec := 0
 
         this.count := 0
-        loop read, this.LogFile() {
-            this.count += StrSplit(A_LoopReadLine, " ")[2]
+	    if FileExist(this.LogFile()) {
+            loop read, this.LogFile() {
+                this.count += StrSplit(A_LoopReadLine, " ")[2]
+            }
         }
         this.prev := this.count
 
