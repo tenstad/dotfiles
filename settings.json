@@ -1,5 +1,4 @@
 {
-  "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,
 
   "workbench.colorTheme": "One Dark Pro Flat",
@@ -74,16 +73,15 @@
     "editorLineNumber.foreground": "#4E3366",
 
     "terminal.ansiBrightMagenta": "#C678DD",
-    "terminal.ansiBlue": "#002dc3",
+    "terminal.ansiBlue": "#0048B5",
     "terminal.ansiBrightBlue": "#0062ff",
     "terminal.ansiBrightCyan": "#56B6C2"
   },
 
-  "editor.fontFamily": "'SauceCodePro', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'FiraCode Nerd Font Mono', 'SauceCodePro', Consolas, 'Courier New', monospace",
   "workbench.statusBar.visible": false,
   "workbench.layoutControl.enabled": false,
   "zenMode.hideLineNumbers": false,
-  "window.zoomLevel": 1,
   "window.commandCenter": false,
 
   "[markdown]": {
@@ -97,5 +95,27 @@
   },
   "go.lintTool": "golangci-lint",
   "go.lintOnSave": "workspace",
-  "yaml.customTags": ["!reference sequence"]
+  "yaml.customTags": ["!reference sequence"],
+  "files.autoSave": "afterDelay",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1,
+  "svelte.enable-ts-plugin": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "remote.autoForwardPortsSource": "hybrid",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  }
 }
