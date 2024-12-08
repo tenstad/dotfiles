@@ -4,14 +4,26 @@ interval := 3000
 logpath := "C:\Users\xxx\keystrokes"
 
 counter := KeyCounter()
-counter.Start()
+frq := KeyFreqLogger()
+
+Restart() {
+    counter.Stop()
+    counter.Start()
+
+    frq.Stop()
+    frq.Start()
+}
+
+timer := () => Restart()
+Restart()
+SetTimer timer, 60000
 
 class KeyCounter {
     __New() {
         this.actionsLastSec := 0
 
         this.count := 0
-	    if FileExist(this.LogFile()) {
+        if FileExist(this.LogFile()) {
             loop read, this.LogFile() {
                 this.count += StrSplit(A_LoopReadLine, " ")[2]
             }
@@ -69,6 +81,59 @@ class KeyCounter {
 
     LogFile() {
         return Format("{:s}\{:s}.txt", logpath, CurrentDay())
+    }
+}
+
+class KeyFreqLogger {
+    __New() {
+        this.interval := 10000
+        this.timer := () => this.Write()
+
+        this.hook := InputHook()
+        this.hook.KeyOpt("{All}", "V N")
+        this.hook.OnKeyUp := (ih, vk, sc) => this.OnPress(ih, vk, sc)
+        this.hook.OnChar := (ih, char) => this.OnChar(ih, char)
+
+        this.presses := Map()
+        this.chars := Map()
+    }
+
+    Start() {
+        SetTimer this.timer, this.interval
+        this.hook.Start()
+    }
+
+    Stop() {
+        SetTimer this.timer, 0
+        this.hook.Stop()
+    }
+
+    OnPress(ih, vk, sc) {
+        char := GetKeyName(Format("vk{:x}sc{:x}", vk, sc))
+        this.presses[char] := this.presses.Get(char, 0) + 1
+    }
+
+    OnChar(ih, char) {
+        char := Ord(char)
+        this.chars[char] := this.chars.Get(char, 0) + 1
+    }
+
+    Write() {
+        this.WriteCount(Format("{:s}_presses.ini", logpath), this.presses)
+        this.WriteCount(Format("{:s}_chars.ini", logpath), this.chars)
+
+        this.presses := Map()
+        this.chars := Map()
+    }
+
+    WriteCount(filename, counts) {
+        for char in counts
+            this.IncCount(filename, char, counts[char])
+    }
+
+    IncCount(filename, char, count) {
+        currentCount := IniRead(filename, char, "count", "0")
+        IniWrite(Integer(currentCount) + count, filename, char, "count")
     }
 }
 
