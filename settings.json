@@ -117,5 +117,9 @@
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  }
+  },
+  "editor.renderWhitespace": "all",
+  "code-eol.highlightExtraWhitespace": true,
+  "code-eol.highlightNonDefault": true,
+  "code-eol.newlineCharacter": "¬"
 }
