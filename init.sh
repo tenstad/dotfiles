@@ -11,8 +11,8 @@ sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/ho
 sudo dnf install -y albert
 
 #gnome-extension 2398 600 4839 1500
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
-gsettings set org.gnome.desktop.interface cursor-size 36
+#gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+#gsettings set org.gnome.desktop.interface cursor-size 36
 
 [ -d ~/coding/dotfiles ] || git clone git@github.com:tenstad/dotfiles.git ~/coding/dotfiles
 sh ~/coding/dotfiles/sync.sh
