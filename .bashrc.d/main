@@ -23,6 +23,10 @@ function ks {
     kubectl get secret $@ -o go-template='{{range $k,$v := .data}}{{printf "%s: " $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{"\n"}}{{end}}'
 }
 
+function kns {
+    kubectl get namespaces | awk '{print $1}' | sed "s/NAME/CLEAR/" | fzf | xargs -ri bash -c 'kubectl config set-context --current --namespace=$(echo {} | sed "s/CLEAR//")'
+}
+
 function kc {
     kubectl config get-contexts --no-headers \
         | sed 's/^\*/ /' \
