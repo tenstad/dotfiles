@@ -35,6 +35,8 @@ function kc {
         | xargs -r kubectl config use-context
 }
 
+alias ta='tmux attach || tmux'
+
 alias x='xargs'
 for i in $(seq 1 9); do alias "f${i}"="awk '{print \$${i}}'"; done
 

@@ -54,14 +54,16 @@ ps1() {
 
         PS1="$PS1${magenta}\w${reset} "
 
-        branch=$(git branch --show-current 2> /dev/null)
-        if [ -n "$branch"  ];then
-                if gettgl PS1_GIT_TRIM_BRANCH; then
-                        branch=$(trimmid "$branch" 16)
+        if gettgl PS1_GIT_BRANCH; then
+		branch=$(git branch --show-current 2> /dev/null)
+                if [ -n "$branch"  ];then
+                        if gettgl PS1_GIT_TRIM_BRANCH; then
+                                branch=$(trimmid "$branch" 16)
+                        fi
+                        # branch_symbol=$'\xE2\x8E\x87'
+                        branch_symbol=$'\xef\x90\x98'
+                        PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
                 fi
-                # branch_symbol=$'\xE2\x8E\x87'
-                branch_symbol=$'\xef\x90\x98'
-                PS1="$PS1${blue}${branch_symbol} ${cyan}${branch}${reset} "
         fi
 }
 
